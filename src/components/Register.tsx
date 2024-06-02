@@ -13,7 +13,7 @@ const Register: React.FC = () => {
     username: "",
     email: "",
     password: "",
-    role: "user" ,
+    userRole: "user" ,
     actiCode:"",
   };
 
@@ -43,7 +43,7 @@ const Register: React.FC = () => {
   return (
 
          <>
-           <h3> <strong>Welcome to Blog Registration</strong></h3>
+           <h3> <strong>Welcome to Shelter Registration</strong></h3>
              <Form style={{margin: "5px",width:"900px"}} 
   layout="vertical"             name="normal_register"
                className="register-form"
