@@ -48,8 +48,8 @@ const EditForm: React.FC = (props:any) => {
         };
 
         if(props.isNew==false){
-       console.log(`path: ${api.uri}/dogs${props.did}`)
-        axios.put(`${api.uri}/dogs/${props.did}`, postDog, {
+       console.log(`path: ${api.uri}/dogs/3`)
+        axios.put(`${api.uri}/dogs/3`, postDog, {
             headers: {
               'Authorization': `Basic ${localStorage.getItem('aToken')}`
             }
