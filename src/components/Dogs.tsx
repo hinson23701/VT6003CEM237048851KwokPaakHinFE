@@ -17,7 +17,7 @@ const Dogs = () => {
   React.useEffect(()=>{
     axios.get(`${api.uri}/dogs`)
       .then((res)=>{
-        setArticles(res.data);   
+        setDogs(res.data);   
         localStorage.setItem('a',JSON.stringify(res.data))                        
       })
       .then(()=>{
@@ -40,7 +40,7 @@ const Dogs = () => {
       return(<>
         <Row gutter={[16,16]} style={{marginLeft:"15px"}}>
           {
-            dogs && dogs.map(({id, name, imageurl, links})=> (
+            dogs && dogs.map(({id, name, imageurl})=> (
             <Col key={id}>                                          
              <Card title={name} style={{width: 300}}
                    cover={<img alt="example" src={imageurl} />} hoverable

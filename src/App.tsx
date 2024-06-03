@@ -12,6 +12,7 @@ import UserT from './types/user.type';
 import * as AuthService from "./services/auth.service";
 import event from "./components/common/Event";
 import Dashboard from './components/Dashboard';
+import Profile from './components/Profile';
 
 
 const { Header, Content, Footer } = Layout;
@@ -78,7 +79,8 @@ export default function App() {
             <Route index element={ <Home /> } />
             <Route path="/dashboard" element={<Dashboard />}  />  
             <Route path="/about" element={<About />}  />
-           
+            <Route path="/profile" element={<Profile />} />
+            
             <Route path="/register" element={<Register />} />
           
           </Routes>
