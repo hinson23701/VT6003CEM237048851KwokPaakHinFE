@@ -16,6 +16,7 @@ import DetailDog from './components/DetailDog';
 import Profile from './components/Profile';
 
 
+
 const { Header, Content, Footer } = Layout;
 
 export default function App() {
