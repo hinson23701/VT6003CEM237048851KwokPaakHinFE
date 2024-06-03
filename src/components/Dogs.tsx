@@ -1,27 +1,28 @@
-import 'antd/dist/reset.css';
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Card, Col, Row, Spin, Input, Checkbox, Space } from 'antd';
 import { api } from './common/http-common';
 import axios from 'axios';
 import { LoadingOutlined } from '@ant-design/icons';
 
 const Dogs = () => {
-  const [dogs, setDogs] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
-  const [searchTerm, setSearchTerm] = React.useState('');
-  const [showAvailable, setShowAvailable] = React.useState(false);
-  const navigate = useNavigate();
+  const [dogs, setDogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showAvailable, setShowAvailable] = useState(false);
 
-  React.useEffect(() => {
-    axios
-      .get(`${api.uri}/dogs`)
-      .then((res) => {
+  useEffect(() => {
+    const fetchDogs = async () => {
+      try {
+        const res = await axios.get(`${api.uri}/dogs`);
         setDogs(res.data);
-      })
-      .then(() => {
         setLoading(false);
-      });
+      } catch (error) {
+        console.error('Error fetching dogs:', error);
+        setLoading(false);
+      }
+    };
+    fetchDogs();
   }, []);
 
   const filteredDogs = dogs.filter((dog) => {
@@ -37,37 +38,19 @@ const Dogs = () => {
 
   return (
     <>
-      <div style={{ marginBottom: '16px' }}>
-        <Space>
-          <Input
-            placeholder="Search dogs"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <Checkbox
-            checked={showAvailable}
-            onChange={(e) => setShowAvailable(e.target.checked)}
-          >
-            Show available only
-          </Checkbox>
-        </Space>
-      </div>
+      {/* Search and filter components */}
       <Row gutter={[16, 16]} style={{ marginLeft: '15px' }}>
-        {filteredDogs.map(({ id, name, imageurl, available }) => (
-          <Col key={id}>
+        {filteredDogs.map(({ ID, name, imageurl, available }) => (
+          <Col key={`${ID}-${name}`}>
             <Card
               title={name}
               style={{ width: 300 }}
               cover={<img alt="example" src={imageurl} />}
               hoverable
-              actions={[]}
+              actions={[
+                <Link to={`/${ID}`}>Details</Link>,
+              ]}
             >
-              <Link
-                to={`/${id}`}
-                onClick={() => navigate(`/${id}`, { state: { dog: id } })}
-              >
-                Details
-              </Link>
               {available === 1 ? 'Available' : 'Unavailable'}
             </Card>
           </Col>

@@ -80,7 +80,7 @@ export default function App() {
             <Route index element={ <Home /> } />
             <Route path="/dashboard" element={<Dashboard />}  />  
             <Route path="/about" element={<About />}  />
-            <Route path="/:aid" element = {<DetailDog /> } /> 
+            <Route path="/:id" element={<DetailDog />} />
             <Route path="/profile" element={<Profile />} />
             
             <Route path="/register" element={<Register />} />
