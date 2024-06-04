@@ -4,12 +4,12 @@ import { Card, Col, Row, Spin, Input, Checkbox, Space } from 'antd';
 import { api } from './common/http-common';
 import axios from 'axios';
 import { LoadingOutlined } from '@ant-design/icons';
-import Icon from './Icon';
+import PostIcon from './PostIcon';
 
 
 
 const Dogs: React.FC = () => {
-  const [dogs, setDogs] = useState<Dog[]>([]);
+  const [dogs, setDogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [showAvailable, setShowAvailable] = useState(false);
@@ -62,7 +62,9 @@ const Dogs: React.FC = () => {
               hoverable
               actions={[
                 <Link to={`/${ID}`}>Details</Link>,
-                <Icon type="heart" FavLink={links.fav} id={ID} />,
+                <PostIcon type="heart" FavLink={links.fav} id={ID} />
+
+                
               ]}
             >
               {a_status === 1 ? 'available' : 'unavailable'}

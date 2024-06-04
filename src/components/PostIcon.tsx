@@ -24,7 +24,7 @@ function getIcon (theme:any, iconType:any) {
   return Icon;
 }
 
-  const  Icon = (props:any) =>{
+  const  PostIcon = (props:any) =>{
   const [selected, setSelected] = React.useState(false);
   const [count, setCount] = React.useState(0);
   const theme = selected ? 'filled' : 'outlined'; 
@@ -50,65 +50,39 @@ function getIcon (theme:any, iconType:any) {
 
 
 
-  function postLike()
-  {
-    if(props.type=='like'&&currentUser.username!="undefined"){ 
-    console.log(`logging like: ${currentUser.username} `)
-         return (axios.post(props.countLink, '', {
+    function addFav() {
+      if (props.type === 'heart' && currentUser.username !== "undefined") {
+        console.log(`Logging fav: ${currentUser.username}`);
+        return axios.post(props.FavLink, '', {
           headers: {
             'Authorization': `Basic ${localStorage.getItem('aToken')}`
           }
-        })    
-            .then(responsejson =>{ 
-              console.log('responsejson.data ',responsejson.data)
-              if(responsejson.data.userid&&responsejson.data.message==="liked")
-            {   
-                alert("Post liked")
-
-                window.location.reload();
-              }
-               else{
-                alert("you have post like already")
-              //  console.log('responsejson.data.message ',responsejson.data.message)
-               }
-            })
-            .catch(err => {
-            console.log(`${props.type} Check network problems pls. ${props.id}`);
-               alert("Check network problems");
         })
-       )
-      }
-
-  }
-
-  function addFav() 
-  {
-    if(props.type=='heart'&&currentUser.username!="undefined"){ 
-      console.log(`logging fav: ${currentUser.username} password: ${currentUser.password}`)
-         return (axios.post(props.FavLink, '', {
-          headers: {
-            'Authorization': `Basic ${localStorage.getItem('aToken')}`
+        .then(response => {
+          if (response.data.userid &&response.data.message === "added") {
+            alert("Fav added");
+            navigate("/favpage");
+            window.location.reload();
+          } else {
+            alert("You have already added this Fav");
           }
-        })   
-            .then(responsejson =>{ if(responsejson.data.userid&&responsejson.data.message==="added")
-            {
-            // console.log("message "+ responsejson.data.message) 
-             alert("Fav added")
-             navigate("/favpage");
-             window.location.reload();
-
-            }
-               else(alert("you have add this Fav already"))
-            })
-            .catch(err => {
-            console.log('err ', err)
-            console.log(`${props.type} Check network problems pls. ${props.id}`);
-               alert("Check network problems");
         })
-       )
+        .catch(error => {
+          console.error('Error adding Fav:', error);
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            alert(`Error adding Fav: ${error.response.data.message}`);
+          } else if (error.request) {
+            // The request was made but no response was received
+            alert("Error: Check network connection"+" "+ props.FavLink);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            alert("Error: An unexpected error occurred");
+          }
+        });
       }
-
-  }
+    }
 
   React.useEffect(()=>{
     if(props.type=='like'){
@@ -144,4 +118,4 @@ function getIcon (theme:any, iconType:any) {
 
 }
 
-export default Icon;
+export default PostIcon;

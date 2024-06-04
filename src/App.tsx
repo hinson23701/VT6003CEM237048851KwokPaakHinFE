@@ -14,6 +14,7 @@ import event from "./components/common/Event";
 import Dashboard from './components/Dashboard';
 import DetailDog from './components/DetailDog';
 import Profile from './components/Profile';
+import FavPage from './components/FavPage';
 
 
 
@@ -83,7 +84,7 @@ export default function App() {
             <Route path="/about" element={<About />}  />
             <Route path="/:id" element={<DetailDog />} />
             <Route path="/profile" element={<Profile />} />
-            
+             <Route path="/favpage" element={<FavPage />} /> 
             <Route path="/register" element={<Register />} />
           
           </Routes>
