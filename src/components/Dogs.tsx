@@ -5,6 +5,8 @@ import { api } from './common/http-common';
 import axios from 'axios';
 import { LoadingOutlined } from '@ant-design/icons';
 import PostIcon from './PostIcon';
+import Displaycomment from './comment';
+import { getCurrentUser } from "../services/auth.service";
 
 
 
@@ -13,6 +15,8 @@ const Dogs: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [showAvailable, setShowAvailable] = useState(false);
+  const currentUser = getCurrentUser();
+  
 
   useEffect(() => {
     axios.get(`${api.uri}/dogs`)
@@ -62,6 +66,7 @@ const Dogs: React.FC = () => {
               hoverable
               actions={[
                 <Link to={`/${ID}`}>Details</Link>,
+                <Displaycomment    msgLink={links.msg} id={ID}/>,
                 <PostIcon type="heart" FavLink={links.fav} id={ID} />
 
                 
