@@ -6,10 +6,8 @@ const { Meta } = Card;
 const BriefDog = () => {
   return (
     <>
-      <Card style={{width: 300}} cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+      <Card style={{width: 300}} cover={<img alt="example" src="https://images.dog.ceo/breeds/affenpinscher/n02110627_12272.jpg" />}
   >
-        <h2>Europe Street beat </h2>
-        <p>www.instagram.com </p>
       </Card>
     </>
   )
